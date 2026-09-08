@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<htmlxmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ユーザー編集画面</title>
+</head>
+<body>
+	<form th:action="@{/edit}"  th:object="${usermasterData}" method ="post"> 
+		
+	<h1>ユーザー編集画面</h1>
+	<button type="submit" >保存</button>
+	
+	<h2>ユーザー情報</h2>
+		<table border="1">
+			<tr>
+				<td></td>
+				<td>
+					<input type ="button"value= "社員番号・氏名検索">
+					※MUTB社員のみ利用可能。スタッフ社員、関連会社社員の場合は、下の項目に直接入力してください。
+				</td>
+			</tr>
+			<tr>
+				<td>◆ユーザーID</td>
+				<td><input type ="text" name="user_id"th:value="*{user_id}"placeholder="入力してください" ></td>
+			</tr>
+			<tr>
+				<td>◆ユーザー名</td>
+				<td><input type ="text"name="user_name"th:value="*{user_name}"placeholder="入力してください" >	</td>
+			</tr>
+			<tr>
+				<td>パスワードロック</td>
+				<td><input type = "checkbox" ><input type= "reset" value="パスワード初期化"></td>
+			</tr>
+			<tr>
+				<td>パスワード更新日</td>
+				<td><input type = "text" ></td>
+			</tr>
+			<tr>
+				<td>最終ログイン日</td>
+				<td><input type = "text" ></td>
+			</tr>
+			<tr>
+				<td>◆利用開始日</td>
+				<td><input type = "text" name="apply_start_date" th:value="*{apply_start_date}"></td>
+			</tr>
+			<tr>
+				<td>利用終了日</td>
+				<td><input type = "text" name="apply_end_date"th:value="*{apply_end_date}" ></td>
+			</tr>
+			<tr>
+				<td>◆部門</td>
+				<td><input type = "text" name="bumon_id" th:value="*{bumon_id}" > <input type = "text" ><input type = "button" value="クリア"></td>
+			</tr>
+			<tr>
+				<td>◆部店</td>
+				<td><input type = "text" name="buten_id" th:value="*{buten_id}" ><input type = "text" ><input type = "button" value="クリア"></td>
+			</tr>
+			<tr>
+				<td>備考</td>
+				<td><textarea id="note" name="note"cols="50"rows="2" th:field="*{note}"></textarea></td>
+			</tr>
+		</table>	
+		
+			
+	<h2>検印情報</h2>
+		<table border="1">
+			<tr>
+				<td>登録ステータス</td>
+					<td><input type ="text" name = "kenin_status" th:value="*{kenin_status}"></td>
+			</tr>
+			<tr>
+				<td>登録者</td>
+				<td><input type ="text"name = "touroku_user_id" th:value="*{touroku_user_id}"></td>
+			</tr>
+			<tr>
+				<td>検印者</td>
+				<td><input type ="text"name= "kenin_user_id" th:value="*{kenin_user_id}"></td>
+			</tr>
+		</table>
+		
+	<h2>権限情報</h2>
+		<table border="1">
+			<tr>
+				<td>◆グループ</td>
+				<td><input type ="text" name="group_id" th:value="*{group_id}"></td>
+				<td><input type ="text"></td>
+			</tr>
+		</table>
+		
+	 	<table>
+			<tr>
+				<td>ロール名</td><td>ロール名</td><td>ロール名</td><td>ロール名</td>
+			</tr>
+			<tr>
+				<td><input type= "checkbox" id="role02_flg" name="role02_flg" th:field="*{role02_flg}" value="1">検印者</td>
+				<td><input type ="checkbox" id="role11_flg" name="role11_flg" th:field="*{role11_flg}" value="1">ユーザーID管理(部店)</td>
+				<td><input type ="checkbox" id="role04_flg" name="role04_flg" th:field="*{role04_flg}" value="1">[コンプラ専用]AML Analyst</td>
+				<td><input type ="checkbox" id="role07_flg" name="role07_flg" th:field="*{role07_flg}" value="1">[コンプラ専用]AML特別権限者</td>	
+			</tr>
+			<tr>
+				<td><input type ="checkbox"id="role08_flg" name="role08_flg" th:field="*{role08_flg}" value="1">アップロード</td>
+				<td><input type ="checkbox"id="role03_flg" name="role03_flg" th:field="*{role03_flg}" value="1">部門内特別権限者</td>
+				<td><input type ="checkbox"id="role05_flg" name="role05_flg" th:field="*{role05_flg}" value="1">[コンプラ専用]AMLO</td>
+				<td><input type ="checkbox"id="role11_flg" name="role11_flg" th:field="*{role11_flg}" value="1">[コンプラ専用]ユーザーID管理</td>	
+			</tr>
+			<tr>
+				<td><input type ="checkbox"id="role09_flg" name="role09_flg" th:field="*{role09_flg}" value="1">ダウンロード</td>
+				<td></td>
+				<td><input type ="checkbox"id="role06_flg" name="role06_flg" th:field="*{role06_flg}" value="1">[コンプラ専用]CAMLO</td>
+				<td><input type ="checkbox"id="role13_flg" name="role13_flg" th:field="*{role13_flg}" value="1">[コンプラ専用]AML用</td>	
+			</tr>
+		</table>
+	</form>
+	<form th:action="@{/edit}" method ="get">
+	<h2>取得データ</h2>
+		<table>
+			<tr th:each="tm_user:${usermasterEdit}"><!-- ① -->
+			  <td th:text="${tm_user.user_id}"></td>
+			  <td th:text="${tm_user.user_name}"></td>
+			  <td th:text="${tm_user.bumon_id}"></td> <!-- ② -->
+			  <td th:text="${tm_user.buten_id}"></td>  <!-- ② -->
+			  <td th:text="${tm_user.group_id}"></td>
+			  <td th:text="${tm_user.role02_flg}"></td>
+				<td th:text="${tm_user.role08_flg}"></td> 
+				<td th:text="${tm_user.note}"></td>
+			 </tr>
+		 </table>
+	</form>
+</body>
+</html>
+
