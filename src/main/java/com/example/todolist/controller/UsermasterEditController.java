@@ -24,11 +24,14 @@ public class UsermasterEditController {
 	
 	private final UsermasterEditRepository usermasterEditRepository;
 	//private final UsermasterEditService usermasterEditService;
+	
+		
 	@GetMapping("/edit")
 	public ModelAndView usermasterEdit(ModelAndView mv) {
 		mv.setViewName("usermasterEdit");
 		mv.addObject("usermasterData",new UsermasterData());
-		List<UsermasterEdit> usermasterEdit = usermasterEditRepository.findAll();
+		List<UsermasterEdit> usermasterEdit = usermasterEditRepository.findByUser_id("225024");
+		
 		
 	
 		mv.addObject("usermasterEdit",usermasterEdit);
@@ -74,9 +77,9 @@ public class UsermasterEditController {
 			entity.setTouroku_user_id(usermasterData.getTouroku_user_id());
 			entity.setKenin_user_id(usermasterData.getKenin_user_id());
 			entity.setKenin_status(usermasterData.getKenin_status());
+			
 			entity.setApply_start_date(LocalDate.parse(usermasterData.getApply_start_date()));
 			entity.setApply_end_date(LocalDate.parse(usermasterData.getApply_end_date()));
-			
 			
 			
 			usermasterEditRepository.save(entity);
@@ -92,5 +95,9 @@ public class UsermasterEditController {
 			
 		}return mv;
 	}
+		
+	
+	
+		
 
 }

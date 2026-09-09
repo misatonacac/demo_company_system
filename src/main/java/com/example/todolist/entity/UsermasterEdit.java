@@ -16,8 +16,8 @@ import lombok.Data;
 @Table(name="tm_user")
 @Data
 public class UsermasterEdit {
-	@Id
 	
+	@Id
 	@Column(name="user_id")
 	private String user_id;
 	@Column(name="user_name")
