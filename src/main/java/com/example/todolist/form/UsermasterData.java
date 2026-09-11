@@ -16,8 +16,9 @@ public class UsermasterData {
 	private String user_id;
 	@NotBlank(message = "ユーザー名を入力してください。")
 	private String user_name;
-	
+	@NotBlank(message = "利用開始日を入力してください。")
 	private String apply_start_date;
+	@NotBlank(message = "利用終了日を入力してください。")
 	private String apply_end_date;
 	private String bumon_id;
 	private String buten_id;

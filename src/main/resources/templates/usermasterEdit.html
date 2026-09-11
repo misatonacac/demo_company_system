@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<form th:action="@{/edit}" th:object="${usermasterData}" th:each="user : ${usermasterEdit}" method="post">
+	<form th:action="@{/edit}" th:object="${usermasterEdit}" th:each="user : ${usermasterEdit}" method="post">
 
 
 		<h1>ユーザー編集画面</h1>
@@ -53,13 +53,20 @@
 			</tr>
 			<tr>
 				<td>◆部門</td>
-				<td><input type="text" name="bumon_id" th:value="${user.bumon_id}"> <input type="text"><input
-						type="button" value="クリア"></td>
+				<td><input type="text" id="bumon_id" name="bumon_id" th:value="${user.bumon_id}"> <input type="text"
+						id="bumon_name" name="bumon_name">
+					<button type="button" id="btn">clear</button>
+
+				</td>
+
 			</tr>
 			<tr>
 				<td>◆部店</td>
-				<td><input type="text" name="buten_id" th:value="${user.buten_id}"><input type="text"><input
-						type="button" value="クリア"></td>
+				<td><input type="text" id="buten_id" name="buten_id" th:value="${user.buten_id}"><input type="text"
+						id = "buten_name" name="buten_name"><button type="button" id="btn1">clear</button>
+
+				</td>
+
 			</tr>
 			<tr>
 				<td>備考</td>
@@ -135,32 +142,36 @@
 		</table>
 	</form>
 
-	<!--form th:action="@{/edit}" method="get">
-		<h2>取得データ</h2>
-		<table>
-			<tr th:each="tm_user:${usermasterEdit}">
-				  <td th:text="${tm_user.user_id}"></td>
-				  <td th:text="${tm_user.user_name}"></td>
-				  <td th:text="${tm_user.bumon_id}"></td> 
-				  <td th:text="${tm_user.buten_id}"></td>  
-				  <td th:text="${tm_user.group_id}"></td>
-				  <td th:text="${tm_user.role02_flg}"></td>
-				<td th:text="${tm_user.role08_flg}"></td>
-				<td th:text="${tm_user.note}"></td>
-				 
-			</tr>
-		</table>
-	</form>
 
 
 
-	<ul>
-		<li th:each="user : ${usermasterEdit}">
-			ユーザーID：<span th:text="${user.user_id}"></span> ユーザー名：<span th:text="${user.user_name}"></span>
-		</li>
-	</ul-->
 
 
 </body>
+<script>
+	document.getElementById("btn").addEventListener('click', function () {
+		if (document.getElementById("bumon_id") !== null) {
+			document.getElementById("bumon_id").value = '';
+		}
+		if (document.getElementById("bumon_name") !== null) {
+			document.getElementById("bumon_name").value = '';
+		}
+
+	});
+
+
+	document.getElementById("btn1").addEventListener('click', function () {
+		if (document.getElementById("buten_id") !== null) {
+			document.getElementById("buten_id").value = '';
+		}
+		if (document.getElementById("buten_name") !== null) {
+			document.getElementById("buten_name").value = '';
+		}
+
+	});
+
+</script>
+
+
 
 </html>
