@@ -11,7 +11,7 @@ import com.example.todolist.entity.UsermasterEdit;
 
 
 @Repository
-public interface UsermasterEditRepository extends JpaRepository<UsermasterEdit, String> {
+public interface UsermasterEditRepository extends JpaRepository<UsermasterEdit, String>{
 	@Query("SELECT u FROM  UsermasterEdit u WHERE u.user_id = :user_id")
     List<UsermasterEdit> findByUser_id(@Param("user_id") String user_id);
 

@@ -41,6 +41,7 @@ public class UsermasterData {
 	
 	
 	
+	
 	public UsermasterEdit toEntity() {
 		UsermasterEdit usermasterEdit = new UsermasterEdit();
 		usermasterEdit.setUser_id(user_id);
@@ -69,7 +70,7 @@ public class UsermasterData {
 		
 		
 		
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu/MM/dd");
 
 		if (apply_start_date == null || apply_start_date.isBlank()) {
 		    usermasterEdit.setApply_start_date(null);

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http: //www.thymeleaf.org" lang="ja">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+	
 
 <head>
 	<meta charset="UTF-8">
@@ -7,7 +8,7 @@
 </head>
 
 <body>
-	<form th:action="@{/edit}" th:object="${usermasterEdit}" th:each="user : ${usermasterEdit}" method="post">
+	<form th:action="@{/edit}" th:object="${user}" method="post">
 
 
 		<h1>ユーザー編集画面</h1>
@@ -25,6 +26,7 @@
 			<tr>
 				<td>◆ユーザーID</td>
 				<td><input type="text" name="user_id" th:value="${user.user_id}" placeholder="入力してください">
+					<input type="text" name="user_mail" >
 				</td>
 			</tr>
 			<tr>
@@ -45,17 +47,19 @@
 			</tr>
 			<tr>
 				<td>◆利用開始日</td>
-				<td><input type="text" name="apply_start_date" th:value="${user.apply_start_date}"></td>
+				<td><input type="text" name="apply_start_date" th:value="${#temporals.format(user.apply_start_date,'yyyy/MM/dd')}">
+					
+				</td>
 			</tr>
 			<tr>
 				<td>利用終了日</td>
-				<td><input type="text" name="apply_end_date" th:value="${user.apply_end_date}"></td>
+				<td><input type="text" name="apply_end_date" th:value="${#temporals.format(user.apply_end_date,'yyyy/MM/dd')}"></td>
 			</tr>
 			<tr>
 				<td>◆部門</td>
 				<td><input type="text" id="bumon_id" name="bumon_id" th:value="${user.bumon_id}"> <input type="text"
 						id="bumon_name" name="bumon_name">
-					<button type="button" id="btn">clear</button>
+					<button id="btn" type="button" >clear</button>
 
 				</td>
 
@@ -63,7 +67,7 @@
 			<tr>
 				<td>◆部店</td>
 				<td><input type="text" id="buten_id" name="buten_id" th:value="${user.buten_id}"><input type="text"
-						id = "buten_name" name="buten_name"><button type="button" id="btn1">clear</button>
+						id = "buten_name" name="buten_name"><button id="btn1" type="button" >clear</button>
 
 				</td>
 
@@ -140,38 +144,53 @@
 						th:checked="${user.role13_flg}">[コンプラ専用]AML用</td>
 			</tr>
 		</table>
-	</form>
 
 
+		</form>
+		<script>
+		  const btn = document.getElementById("btn");
+		  const btn1 = document.getElementById("btn1");
+		  
+		  console.log("btn:", btn);
+		   console.log("btn1:", btn1);
+		  
+
+		  if (btn !== null) {
+		    btn.addEventListener("click", () => {
+		      const bumonId = document.getElementById("bumon_id");
+		      const bumonName = document.getElementById("bumon_name");
+
+		      if (bumonId !== null) {
+		        bumonId.value = "";
+		      }
+
+		      if (bumonName !== null) {
+		        bumonName.value = "";
+		      }
+		    });
+		  }
+
+
+		  if (btn1 !== null) {
+		    btn1.addEventListener("click", () => {
+		      const butenId = document.getElementById("buten_id");
+		      const butenName = document.getElementById("buten_name");
+
+		      if (butenId !== null) {
+		        butenId.value = "";
+		      }
+
+		      if (butenName !== null) {
+		        butenName.value = "";
+		      }
+		    });
+		  }
+		</script>
 
 
 
 
 </body>
-<script>
-	document.getElementById("btn").addEventListener('click', function () {
-		if (document.getElementById("bumon_id") !== null) {
-			document.getElementById("bumon_id").value = '';
-		}
-		if (document.getElementById("bumon_name") !== null) {
-			document.getElementById("bumon_name").value = '';
-		}
-
-	});
-
-
-	document.getElementById("btn1").addEventListener('click', function () {
-		if (document.getElementById("buten_id") !== null) {
-			document.getElementById("buten_id").value = '';
-		}
-		if (document.getElementById("buten_name") !== null) {
-			document.getElementById("buten_name").value = '';
-		}
-
-	});
-
-</script>
-
 
 
 </html>
