@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<form th:action="@{/edit/bumonSelect}"  method="post">
+	<form th:action="@{/bumonSelect}" method="post">
 		<h2>部門選択画面</h2>
 
 		<h1>部門一覧</h1>
@@ -18,14 +18,28 @@
 				<th>部門ID</th>
 				<th>部門名</th>
 			</tr>
-			<tr th:each ="bumon :${bumonSelect}">
-				<td><input type="button" value="-"></td>
-				<td><input type="text" id="bumon_id" name="bumon_id" th:value="${bumon.bumon_id}"></td>
-				<td><input type="text" id="bumon_name" name="bumon_name" th:value="${bumon.bumon_name}"></td>
+			<tr th:each="bumon :${bumonSelect}">
+				<td><button type="button" th:attr="data-bumon-id=${bumon.bumon_id}, data-bumon-name=${bumon.bumon_name}"
+						onclick="selectBumon(this)">選択</button></td>
+				<td><input type="text" th:id="'bumon_id_'+${bumon.bumon_id}" name="bumon_id"
+						th:value="${bumon.bumon_id}">
+				</td>
+				<td><input type="text" th:id="'bumon_name_'+${bumon.bumon_name}" name="bumon_name"
+						th:value="${bumon.bumon_name}"></td>
 			</tr>
 		</table>
 
 	</form>
+
+	<script>
+		function selectBumon(button) {
+			const bumonId = button.dataset.bumonId;
+			const bumonName = button.dataset.bumonName;
+			// ここで元のselectBumon処理を実行
+			console.log(bumonId, bumonName);
+		}
+	</script>
+
 
 
 </body>

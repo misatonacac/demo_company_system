@@ -18,7 +18,7 @@ import lombok.AllArgsConstructor;
 public class BumonSelctController {
 	private final BumonSelectRepository bumonSelectRepository;
 
-	@GetMapping("edit/bumonSelect")
+	@GetMapping("/edit/bumonSelect")
 	public ModelAndView bumonSelect(ModelAndView mv) {
 		System.err.println("### 部門選択コントローラ開始 ###");
 		mv.setViewName("bumonSelect");

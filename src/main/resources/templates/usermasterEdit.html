@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
-	
+
 
 <head>
 	<meta charset="UTF-8">
@@ -8,7 +8,7 @@
 </head>
 
 <body>
-	<form th:action="@{/edit}" th:object="${user}" method="post">
+	<form th:action="@{/edit}" th:object="${user}" method="post" onsubmit="return registerUser()">
 
 
 		<h1>ユーザー編集画面</h1>
@@ -26,7 +26,7 @@
 			<tr>
 				<td>◆ユーザーID</td>
 				<td><input type="text" name="user_id" th:value="${user.user_id}" placeholder="入力してください">
-					<input type="text" name="user_mail" >
+					<input type="text" name="user_mail">
 				</td>
 			</tr>
 			<tr>
@@ -47,27 +47,31 @@
 			</tr>
 			<tr>
 				<td>◆利用開始日</td>
-				<td><input type="text" name="apply_start_date" th:value="${#temporals.format(user.apply_start_date,'yyyy/MM/dd')}">
-					
+				<td><input type="text" name="apply_start_date"
+						th:value="${#temporals.format(user.apply_start_date,'yyyy/MM/dd')}">
+
 				</td>
 			</tr>
 			<tr>
 				<td>利用終了日</td>
-				<td><input type="text" name="apply_end_date" th:value="${#temporals.format(user.apply_end_date,'yyyy/MM/dd')}"></td>
+				<td><input type="text" name="apply_end_date"
+						th:value="${#temporals.format(user.apply_end_date,'yyyy/MM/dd')}"></td>
 			</tr>
 			<tr>
 				<td>◆部門</td>
-				<td><input type="text" id="bumon_id" name="bumon_id" th:value="${user.bumon_id}"> <input type="text"
-						id="bumon_name" name="bumon_name">
-					<button id="btn" type="button" >clear</button>
+				<td><input type="text" id="bumon_id" name="bumon_id" th:value="${user.bumon_id}" readonly> <input
+						type="text" id="bumon_name" name="bumon_name" readonly>
+					<button type="button" onclick="openBumonWindow()">部門選択</button>
+					<button id="btn" type="button">clear</button>
 
 				</td>
 
 			</tr>
 			<tr>
 				<td>◆部店</td>
-				<td><input type="text" id="buten_id" name="buten_id" th:value="${user.buten_id}"><input type="text"
-						id = "buten_name" name="buten_name"><button id="btn1" type="button" >clear</button>
+				<td><input type="text" id="buten_id" name="buten_id" th:value="${user.buten_id}" readonly><input
+						type="text" id="buten_name" name="buten_name" readonly><button id="btn1"
+						type="button">clear</button>
 
 				</td>
 
@@ -146,46 +150,80 @@
 		</table>
 
 
-		</form>
-		<script>
-		  const btn = document.getElementById("btn");
-		  const btn1 = document.getElementById("btn1");
-		  
-		  console.log("btn:", btn);
-		   console.log("btn1:", btn1);
-		  
+	</form>
+	<script>
+		const btn = document.getElementById("btn");
+		const btn1 = document.getElementById("btn1");
 
-		  if (btn !== null) {
-		    btn.addEventListener("click", () => {
-		      const bumonId = document.getElementById("bumon_id");
-		      const bumonName = document.getElementById("bumon_name");
-
-		      if (bumonId !== null) {
-		        bumonId.value = "";
-		      }
-
-		      if (bumonName !== null) {
-		        bumonName.value = "";
-		      }
-		    });
-		  }
+		console.log("btn:", btn);
+		console.log("btn1:", btn1);
 
 
-		  if (btn1 !== null) {
-		    btn1.addEventListener("click", () => {
-		      const butenId = document.getElementById("buten_id");
-		      const butenName = document.getElementById("buten_name");
+		if (btn !== null) {
+			btn.addEventListener("click", () => {
+				const bumonId = document.getElementById("bumon_id");
+				const bumonName = document.getElementById("bumon_name");
 
-		      if (butenId !== null) {
-		        butenId.value = "";
-		      }
+				if (bumonId !== null) {
+					bumonId.value = "";
+				}
 
-		      if (butenName !== null) {
-		        butenName.value = "";
-		      }
-		    });
-		  }
-		</script>
+				if (bumonName !== null) {
+					bumonName.value = "";
+				}
+			});
+		}
+
+
+		if (btn1 !== null) {
+			btn1.addEventListener("click", () => {
+				const butenId = document.getElementById("buten_id");
+				const butenName = document.getElementById("buten_name");
+
+				if (butenId !== null) {
+					butenId.value = "";
+				}
+
+				if (butenName !== null) {
+					butenName.value = "";
+				}
+			});
+		}
+
+
+		function openBumonWindow() {
+			window.open(
+				'/edit/bumonSelect',
+				'bumonSelect',//ウィンドウの名前
+				'width=500,height=400'
+			);
+		}
+		function registerUser() {
+			const userId = document.querySelector('[name="user_id"]').value;
+			const userName = document.querySelector('[name="user_name"]').value;
+			const bumonId = document.getElementById("bumon_id").value;
+			const bumonName = document.getElementById("bumon_name").value;
+
+			if (userId === "") {
+				alert("ユーザーIDを入力してください");
+				return false;
+			}
+
+			if (userName === "") {
+				alert("ユーザー名を入力してください");
+				return false;
+			}
+
+			if (bumonId === "") {
+				alert("部門を選択してください");
+				return false;
+			}
+
+			return true;
+		}
+
+
+	</script>
 
 
 
