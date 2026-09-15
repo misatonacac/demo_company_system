@@ -8,7 +8,7 @@ VALUES
 
 INSERT INTO tm_bumon (bumon_id,bumon_name,display_order,apply_start_date,apply_end_date,create_date,create_user,last_update_date,last_update_user)
 VALUES 
-('R1','リテール部門',1,'2026-09-20','2028-09-20','2026-09-15','中村','2026-09-15','中村');
+('R2','シェアリング部門',2,'2026-09-20','2028-09-20','2026-09-15','中村','2026-09-15','中村');
 
 
 
