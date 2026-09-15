@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>部門選択画面</title>
+</head>
+
+<body>
+	<form th:action="@{/edit/bumonSelect}"  method="post">
+		<h2>部門選択画面</h2>
+
+		<h1>部門一覧</h1>
+		<table class="table-bumon" border="1">
+			<tr>
+				<th>選択</th>
+				<th>部門ID</th>
+				<th>部門名</th>
+			</tr>
+			<tr th:each ="bumon :${bumonSelect}">
+				<td><input type="button" value="-"></td>
+				<td><input type="text" id="bumon_id" name="bumon_id" th:value="${bumon.bumon_id}"></td>
+				<td><input type="text" id="bumon_name" name="bumon_name" th:value="${bumon.bumon_name}"></td>
+			</tr>
+		</table>
+
+	</form>
+
+
+</body>
+
+</html>
